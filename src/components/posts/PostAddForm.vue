@@ -12,6 +12,7 @@ export default {
   computed: {
     isContentsValid() {
       return this.contents.length <= 200;
+
     },
   },
   methods : {
