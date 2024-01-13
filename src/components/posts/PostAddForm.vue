@@ -21,7 +21,6 @@ export default {
           title: this.title,
           contents: this.contents
         });
-
         console.log(response);
       } catch (error) {
         console.log(error.response.data.message);
