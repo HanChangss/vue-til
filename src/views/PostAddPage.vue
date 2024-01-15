@@ -8,9 +8,6 @@ export default {
 </script>
 
 <template>
-  <div>
-    생성페이지
-  </div>
   <PostAddForm :type="parentType"></PostAddForm>
 </template>
 

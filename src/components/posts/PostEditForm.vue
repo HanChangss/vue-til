@@ -1,5 +1,5 @@
 <script>
-import { createPosts} from "@/api";
+import {editPosts, fetchPost} from "@/api";
 
 export default {
   data() {
@@ -16,26 +16,32 @@ export default {
   },
   methods : {
     async submitForm() {
+      const id = this.$route.params.id;
       try {
-        const response = await createPosts({
+        await editPosts(id, {
           title: this.title,
           contents: this.contents
         });
         this.$router.push("/main");
-        console.log(response);
       } catch (error) {
         console.log(error.response.data.message);
         this.logMessage = error.response.data.message;
       }
 
     }
+  },
+  async created() {
+    const id = this.$route.params.id;
+    const { data } = await fetchPost(id);
+    this.title = data.title;
+    this.contents = data.contents;
   }
 }
 </script>
 
 <template>
   <div class="contents">
-    <h1 class="page-header">Create Post</h1>
+    <h1 class="page-header">Edit Post</h1>
     <div class="form-wrapper">
       <form class="form" @submit.prevent="submitForm">
         <div>
@@ -52,7 +58,7 @@ export default {
             Contents length must be less than 250
           </p>
         </div>
-        <button type="submit" class="btn">Create</button>
+        <button type="submit" class="btn">Edit</button>
       </form>
       <p class="log">
         {{ logMessage }}

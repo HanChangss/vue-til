@@ -54,16 +54,25 @@ function  fetchPosts() {
   return instance.get('posts')
 }
 
+//학습 노트 한건만 가져오는 API
+function fetchPost(postsId) {
+    return instance.get(`posts/${postsId}`)
+}
+
 //학습 노트 데이터 생성하는 API
 function  createPosts(postData) {
     return instance.post('posts', postData);
 }
 
-//학스 노트 데이터를 삭제하는 API
 // 학스 노트 데이터를 삭제하는 API
 function deletePosts(postsId) {
     return instance.delete(`posts/${postsId}`);
 }
 
+//학습 노트 수정하는 API
+function editPosts(postsId,postData) {
+    return instance.put(`posts/${postsId}`,postData);
+}
 
-export {registerUser, loginUser, fetchPosts, createPosts, deletePosts};
+
+export {registerUser, loginUser, fetchPosts, fetchPost, createPosts, deletePosts, editPosts};

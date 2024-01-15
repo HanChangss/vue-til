@@ -11,14 +11,14 @@ export default {
   data() {
     return {
       postsItems : [],
-      isLoding: false,
+      isLoading: false,
     }
   },
   methods: {
       async fetchData() {
-        this.isLoding = false;
+        this.isLoading = true;
         const { data } = await fetchPosts();
-        this.isLoding =true;
+        this.isLoading =false;
         this.postsItems = data.posts;
       }
   },
@@ -38,6 +38,7 @@ export default {
             v-for="postItem in postsItems"
             :key="postItem._id"
             :postItem="postItem"
+            @refresh="fetchData"
         ></PostListItem>
       </ul>
       <router-link to="/add" class="create-button">

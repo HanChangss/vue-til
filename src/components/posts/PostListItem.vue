@@ -9,8 +9,17 @@ export default {
   },
   methods: {
     async deleteItem() {
-      console.log("삭제 : " + this.postItem._id);
-      await deletePosts(this.postItem._id);
+
+      if(confirm("정말 삭제하시겠습니까 ? ")) {
+        await deletePosts(this.postItem._id);
+        this.$emit('refresh');
+      } else {
+
+      }
+
+    },
+    moveEditPage() {
+      this.$router.push(`post/${this.postItem._id}`)
     }
   }
 }
@@ -26,7 +35,7 @@ export default {
     </div>
     <div class="post-time">
       {{ postItem.createdAt }}
-      <i class="icon ion-md-create"></i>
+      <i class="icon ion-md-create" @click="moveEditPage"></i>
       <i class="icon ion-md-trash" @click="deleteItem"></i>
     </div>
   </li>
