@@ -2,20 +2,12 @@ import axios from 'axios';
 import {store} from '@/store/index';
 import { setInterceptors } from './common/interceptors';
 
-
-// // 액시오스 초기화 함수
-// function createInstance() {
-//   const instance = axios.create({
-//     baseURL: process.env.VUE_APP_API_URL,
-//   });
-//   return setInterceptors(instance);
-// }
-// const instance = createInstance();
-
-
-
 const instance = axios.create({
   baseURL: process.env.VUE_APP_API_URL,
+});
+
+const test = axios.create({
+    baseURL: process.env.VUE_APP_API_URL + 'posts',
 });
 
 // 요청 인터셉터 설정
@@ -62,8 +54,16 @@ function  fetchPosts() {
   return instance.get('posts')
 }
 
+//학습 노트 데이터 생성하는 API
 function  createPosts(postData) {
     return instance.post('posts', postData);
 }
 
-export {registerUser, loginUser, fetchPosts, createPosts};
+//학스 노트 데이터를 삭제하는 API
+// 학스 노트 데이터를 삭제하는 API
+function deletePosts(postsId) {
+    return instance.delete(`posts/${postsId}`);
+}
+
+
+export {registerUser, loginUser, fetchPosts, createPosts, deletePosts};
